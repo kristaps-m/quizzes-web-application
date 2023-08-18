@@ -1,0 +1,12 @@
+ul
+- question.errors.full_messages.each do |error|
+    p(style="color: red") = error
+
+= form_with model: [question.quiz, question] do |form|
+    = form.label :content
+    = form.text_field :content
+
+    = form.label :answer
+    = form.text_area :answer
+
+    = form.submit

@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+ .alert {
+     border: 2px solid var(--code);
+ }

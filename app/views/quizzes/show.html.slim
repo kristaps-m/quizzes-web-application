@@ -1,0 +1,25 @@
+h1 = @quiz.title
+div
+  | Quiz created at: 
+  = @quiz.created_at.strftime('%Y-%m-%d')
+
+p = @quiz.description
+- if @quiz.image.attached?
+    = image_tag @quiz.image
+
+h3 Questions
+ul
+  - @quiz.questions.each do |q|
+    li = link_to q.content, quiz_question_path(@quiz, q)
+
+div
+    = button_to "Destroy this quiz", @quiz, method: :delete
+
+div
+    = link_to 'Edit', edit_quiz_path(@quiz)
+
+div
+    = link_to 'New Question', new_quiz_question_path(@quiz)
+
+div
+    = link_to 'Back to Quizzes', quizzes_path

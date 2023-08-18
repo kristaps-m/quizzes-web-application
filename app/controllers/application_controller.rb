@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-
     def index
-        'render' show
+      render 'show'
     end
-end
+  end
