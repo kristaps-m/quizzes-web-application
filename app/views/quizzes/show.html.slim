@@ -1,25 +1,20 @@
-h1 = @quiz.title
-div
-  | Quiz created at: 
-  = @quiz.created_at.strftime('%Y-%m-%d')
+div.content-container
+  h1 = @quiz.title
+  div
+    | Quiz created at: 
+    = @quiz.created_at.strftime('%Y/%m/%d')
 
-p = @quiz.description
-- if @quiz.image.attached?
-    = image_tag @quiz.image
+    p = @quiz.description
+    - if @quiz.image.attached?
+        = image_tag @quiz.image, style: 'border: 2px solid #FF00AA;'
 
-h3 Questions
-ul
-  - @quiz.questions.each do |q|
-    li = link_to q.content, quiz_question_path(@quiz, q)
+    h3 Questions
+    ul
+      - @quiz.questions.each do |q|
+        li = link_to q.content, quiz_question_path(@quiz, q)
 
-div
-    = button_to "Destroy this quiz", @quiz, method: :delete
-
-div
-    = link_to 'Edit', edit_quiz_path(@quiz)
-
-div
-    = link_to 'New Question', new_quiz_question_path(@quiz)
-
-div
-    = link_to 'Back to Quizzes', quizzes_path
+    .button-container
+      = button_to 'Add new question', new_quiz_question_path(@quiz), method: :get, class: 'custom-button'
+      = button_to 'Edit this quiz', edit_quiz_path(@quiz), method: :get, class: 'custom-button'
+      = button_to "Destroy this quiz", @quiz, method: :delete, class: 'custom-button'
+      = button_to 'Back to the quizzes', quizzes_path, method: :get, class: 'custom-button'

@@ -1,6 +1,6 @@
-h1 Quiz edit
+div.content-container
+    h1 Edit Quiz
 
-= render 'form', quiz: @quiz
+    = render 'form', quiz: @quiz
 
-hr
-= link_to 'Back to Quiz', quiz_path(@quiz)
+    = button_to 'Back to Quiz', quiz_path(@quiz), method: :get, class: 'custom-button'

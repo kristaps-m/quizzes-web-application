@@ -1,28 +1,35 @@
 - quiz.errors.full_messages.each do |error|
-    p(style="color: red") = error
+    p(style="color: rgba(0, 204, 255)") = error
 
 = form_with model: quiz do |form|
     = form.label :title, style: 'display: block;'
-    = form.text_field :title
+    = form.text_field :title, class: 'form-style'
 
     = form.label :description, style: 'display: block;'
-    = form.text_area :description
+    = form.text_area :description, class: 'form-style'
 
-    = form.label :image
+    = form.label :image, style: 'font-size: 16px; margin-right: 10px;'
     = form.file_field :image
 
-    h5 Questions
+    - if quiz.image.attached?
+    .d-flex.align-items-center
+        = form.check_box :remove_image, value: '1', class: 'custom-checkbox'
+        = form.label :remove_image, 'Remove Image', class: 'custom-checkbox-label'
+
+    h3 Questions
     = form.fields_for :questions do |q_form|
         fieldset
             = q_form.label :content
-            = q_form.text_field :content
+            = q_form.text_field :content, class: 'form-style'
 
             = q_form.label :answer
-            = q_form.text_field :answer
+            = q_form.text_field :answer, class: 'form-style'
 
-            = q_form.label :_destroy
-            = q_form.check_box :_destroy
+            = q_form.check_box :_destroy, class: 'custom-checkbox'
+            = q_form.label :_destroy, class: 'custom-checkbox-label'
 
-    = form.button 'New Question', name: :add_question, value: '1'
+    div
+        = form.button 'Create question', name: :add_question, value: '1', class: 'custom-button'
 
-    = form.submit
+    div
+        = form.submit 'Update quiz', class: 'custom-button'

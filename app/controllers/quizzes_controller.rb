@@ -15,7 +15,7 @@ class QuizzesController < ApplicationController
     def create
         @quiz = Quiz.new(quiz_params)
         if @quiz.save
-            redirect_to @quiz, notice: 'Hooray! You done did it!'
+            redirect_to @quiz, notice: 'Hooray! You did it!'
         else
             flash.now.alert = 'Sorry, something went wrong..'
             render :new, status: :unprocessable_entity
@@ -27,15 +27,20 @@ class QuizzesController < ApplicationController
 
     def update
         if params[:add_question]
-            @quiz.assign_attributes quiz_params
-            @quiz.questions.build
-            render :edit, status: 200
-        elsif @quiz.update(quiz_params)
-            redirect_to @quiz
+          @quiz.assign_attributes(quiz_params)
+          @quiz.questions.build
+          render :edit, status: 200
         else
+          if @quiz.update(quiz_params)
+            if params[:quiz][:remove_image] == '1'
+              @quiz.image.purge
+            end
+            redirect_to @quiz
+          else
             render :edit, status: :unprocessable_entity
+          end
         end
-    end
+      end
 
     def destroy
         @quiz.destroy

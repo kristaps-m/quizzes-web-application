@@ -1,6 +1,6 @@
-h1 New Question
+div.content-container
+    h1 New Question
 
-= render 'form', question: @question
+    = render 'form', question: @question
 
-hr
-= link_to 'Back to Quiz', quiz_path(@quiz)
+    = button_to 'Back to Quiz', quiz_path(@quiz), method: :get, class: 'custom-button'
