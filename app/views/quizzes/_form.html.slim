@@ -1,35 +1,34 @@
 - quiz.errors.full_messages.each do |error|
-    p(style="color: rgba(0, 204, 255)") = error
+  p(style="color: rgba(0, 204, 255)") = error
 
 = form_with model: quiz do |form|
-    = form.label :title, style: 'display: block;'
-    = form.text_field :title, class: 'form-style'
+  = form.label :title, 'Title', class: 'form-label'
+  = form.text_field :title, class: 'form-style'
 
-    = form.label :description, style: 'display: block;'
-    = form.text_area :description, class: 'form-style'
+  = form.label :description, 'Description', class: 'form-label'
+  = form.text_area :description, class: 'form-style'
 
-    = form.label :image, style: 'font-size: 16px; margin-right: 10px;'
-    = form.file_field :image
-
-    - if quiz.image.attached?
+  = form.label :image, 'Image', class: 'form-label'
+  = form.file_field :image
+  - if quiz.image.attached?
     .d-flex.align-items-center
-        = form.check_box :remove_image, value: '1', class: 'custom-checkbox'
-        = form.label :remove_image, 'Remove Image', class: 'custom-checkbox-label'
+      = form.check_box :remove_image, value: '1', class: 'custom-checkbox'
+      = form.label :remove_image, 'Remove Image', class: 'custom-checkbox-label'
 
-    h3 Questions
-    = form.fields_for :questions do |q_form|
-        fieldset
-            = q_form.label :content
-            = q_form.text_field :content, class: 'form-style'
+  h3 Questions
+  = form.fields_for :questions do |q_form|
+    fieldset
+      = q_form.label :content, 'Content', class: 'form-label'
+      = q_form.text_field :content, class: 'form-style'
 
-            = q_form.label :answer
-            = q_form.text_field :answer, class: 'form-style'
+      = q_form.label :answer, 'Answer', class: 'form-label'
+      = q_form.text_field :answer, class: 'form-style'
 
-            = q_form.check_box :_destroy, class: 'custom-checkbox'
-            = q_form.label :_destroy, class: 'custom-checkbox-label'
+      = q_form.check_box :_destroy, class: 'custom-checkbox'
+      = q_form.label :_destroy, 'Remove Question', class: 'custom-checkbox-label'
 
-    div
-        = form.button 'Create question', name: :add_question, value: '1', class: 'custom-button'
+  div
+    = form.button 'Create Question', name: :add_question, value: '1', class: 'custom-button'
 
-    div
-        = form.submit 'Update quiz', class: 'custom-button'
+  div
+    = form.submit 'Update Quiz', class: 'custom-button'

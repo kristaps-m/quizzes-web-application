@@ -5,5 +5,6 @@ div.content-container
       li
         = link_to quiz.title, quiz_path(quiz)
 
-        -# Add the "Take Quiz" button here
         = button_to "Take Quiz", take_quiz_path(quiz), method: :get, class: 'custom-button'
+
+  = button_to 'Create Quiz', new_quiz_path, method: :get, class: 'custom-button'

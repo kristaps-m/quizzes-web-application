@@ -4,4 +4,6 @@ div.content-container
 
     p = @question.answer
 
+    = button_to 'Delete Question', quiz_question_path(@quiz, @question), method: :delete, data: { confirm: 'Are you sure you want to delete this question?' }, class: 'custom-button'
+
     = button_to 'Back to Quiz', quiz_path(@quiz), method: :get, class: 'custom-button'
