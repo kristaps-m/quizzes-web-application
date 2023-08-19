@@ -1,0 +1,11 @@
+div.content-container
+  - if @questions.present?
+    = form_with url: submit_quiz_path(@quiz), method: :post do |form|
+      = csrf_meta_tags
+
+      - @questions.each_with_index do |question, index|
+        h3 Question #{index + 1}
+        p= question.content
+        = form.text_field :"user_answers[q#{question.id}_answer]", placeholder: "Your answer", class: 'form-style'
+
+      = form.submit "Submit Answers", class: 'custom-button'

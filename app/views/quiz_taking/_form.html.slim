@@ -1,0 +1,9 @@
+form.form-style action="#{submit_quiz_path(@quiz)}" method="post"
+  = csrf_meta_tags
+
+  - @questions.each_with_index do |question, index|
+    h3 Question #{index + 1}
+    p= question.content
+    = text_field_tag "user_answers[q#{question.id}_answer]", nil, placeholder: "Your answer", class: 'form-style'
+
+  = submit_tag "Submit Answers", class: 'custom-button'

@@ -1,0 +1,6 @@
+div.content-container
+    h2 Your Quiz Results
+
+    p Your score: #{@score}
+
+    = button_to 'Back to the quizzes', quizzes_path, method: :get, class: 'custom-button'
