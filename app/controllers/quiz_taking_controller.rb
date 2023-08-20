@@ -1,6 +1,6 @@
 class QuizTakingController < ApplicationController
-  before_action :load_quiz_and_questions, only: [:take, :submit]
-  
+  before_action :load_quiz_and_questions, only: %i[take submit]
+
   def take
     @current_question = @questions[@current_question_index]
   end
@@ -23,6 +23,7 @@ class QuizTakingController < ApplicationController
   def results
     @quiz = Quiz.find(params[:id])
     @score = session[:quiz_score]
+    @results = calculate_score
   end
 
   private
@@ -41,6 +42,21 @@ class QuizTakingController < ApplicationController
 
   def calculate_score
     user_answers = session["quiz_#{params[:id]}_user_answers"]
-    @questions.count { |question| user_answers["q#{question.id}_answer"] == question.answer }
+    @questions = @quiz.questions
+    score = 0
+    results = []
+
+    @questions.each do |question|
+      user_answer = user_answers["q#{question.id}_answer"]
+      if user_answer == question.answer
+        score += 1
+        results << { question: question, correct: true }
+      else
+        results << { question: question, correct: false }
+      end
+    end
+
+    session[:quiz_score] = score
+    results
   end
 end

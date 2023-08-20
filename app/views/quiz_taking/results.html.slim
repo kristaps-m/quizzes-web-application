@@ -1,6 +1,26 @@
 div.content-container
-    h2 Your Quiz Results
+  h1 Your Quiz Results
 
-    p Your score: #{@score}
+  - if @score.is_a?(Integer)
+    h2 Your Score: #{@score}
+
+    ul
+      - @results.each do |result|
+        li
+          h3 = result[:question]["content"]
+          - class_name = result[:correct] ? 'correct' : 'incorrect'
+          p class=class_name
+            = result[:correct] ? 'Correct!' : 'Incorrect! '
+            - unless result[:correct]
+              span(class=class_name) Your Answer: 
+              span = session["quiz_#{params[:id]}_user_answers"]["q#{result[:question]["id"]}_answer"]
+          p 
+            span(class=class_name) Correct Answer: 
+            span(class=class_name) = result[:question]["answer"]
 
     = button_to 'Back to Quizzes', quizzes_path, method: :get, class: 'custom-button'
+
+  - else
+    p Are you ready to see your results?
+
+    = button_to 'View Quiz Results', quiz_results_path(@quiz), method: :get, class: 'custom-button'
