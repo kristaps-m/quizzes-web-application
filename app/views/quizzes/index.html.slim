@@ -1,0 +1,10 @@
+div.content-container
+  h1 Quizzes
+  ul
+    - @quizzes.each do |quiz|
+      li
+        = link_to quiz.title, quiz_path(quiz)
+
+        = button_to "Take Quiz", take_quiz_path(quiz), method: :get, class: 'custom-button'
+
+  = button_to 'Create Quiz', new_quiz_path, method: :get, class: 'custom-button'
