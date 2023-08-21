@@ -6,6 +6,10 @@ class Quiz < ApplicationRecord
     
     validates :title, presence: true, uniqueness: true, length: { minimum: 3 }
     accepts_nested_attributes_for :questions, allow_destroy: true, reject_if: :all_blank
+
+    def question_count
+      questions.count
+    end
 end
 
 # == Schema Information
