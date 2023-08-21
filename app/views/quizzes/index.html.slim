@@ -1,10 +1,22 @@
-div.content-container
-  h1 Quizzes
-  ul
+// new quizzes index table below
+table.styled-table
+  thead
+    tr
+      //th Id
+      th Title
+      th Created At (d-m-y)
+      th Question Count
+      th Description
+      th Take this Quiz
+
+  tbody
     - @quizzes.each do |quiz|
-      li
-        = link_to quiz.title, quiz_path(quiz)
+      tr
+        //td = quiz.id
+        td = link_to quiz.title, quiz_path(quiz)
+        td = date_in_words(quiz.created_at)
+        td = quiz.question_count
+        td = quiz.description
+        td = button_to "Take Quiz", take_quiz_path(quiz), method: :get, class: 'custom-button-table'
 
-        = button_to "Take Quiz", take_quiz_path(quiz), method: :get, class: 'custom-button'
-
-  = button_to 'Create Quiz', new_quiz_path, method: :get, class: 'custom-button'
+= button_to 'Create Quiz', new_quiz_path, method: :get, class: 'custom-button'

@@ -127,3 +127,55 @@ li a:visited {
   color: rgb(255, 255, 255);
   font-weight: bold;
 }
+
+/* Style for the quizzes table */
+.styled-table {
+  width: auto; /* Reset the width to "auto" to allow margin/padding */
+  border-collapse: collapse;
+  margin: 0 auto; /* Center the table horizontally */
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+.styled-table th,
+.styled-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table th {
+  background-color: #f2f2f2;
+}
+
+/* Style for the "Take Quiz" button */
+.custom-button-table {
+  background-color: rgb(2, 162, 202);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.custom-button-table:hover {
+  background-color: var(--code, rgb(255, 0, 170, 0.918));
+}
+
+ /* Remove underline and change color for regular links */
+a {
+  text-decoration: none; /* Remove underline */
+  color: rgba(255, 0, 170, 0.918); /* Change link color */
+}
+
+/* Style visited links */
+a:visited {
+  color: rgba(248, 99, 174, 0.918); /* Change color for visited links */
+}
+
+/* Style links on hover */
+a:hover {
+  text-decoration: underline; /* Add underline on hover */
+  color: rgba(236, 18, 65, 0.918); /* Change color on hover */
+}
