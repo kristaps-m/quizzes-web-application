@@ -29,6 +29,12 @@ li a:visited {
   color: inherit;
 }
 
+.custom-link {
+  text-decoration: none;
+  color: inherit;
+  font-size: 16px;
+}
+
 .content-container {
   display: flex;
   flex-direction: column;
@@ -58,10 +64,28 @@ li a:visited {
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin: 10px 0;
+  text-decoration: none;
+}
+
+.registration-button {
+  text-align: center;
+  height: 30px;
+  width: 180px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: rgb(2, 162, 202);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px 0;
+  text-decoration: none;
 }
 
 .custom-button:hover,
-.custom-file-button:hover {
+.custom-file-button:hover,
+.registration-button:hover {
   background-color: var(--code, rgb(255, 0, 170, 0.918));
 }
 
