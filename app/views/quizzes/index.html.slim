@@ -4,7 +4,7 @@ table.styled-table
     tr
       //th Id
       th Title
-      th Created At (d-m-y)
+      th Created At
       th Question Count
       th Description
       th Take this Quiz
@@ -19,4 +19,6 @@ table.styled-table
         td = quiz.description
         td = button_to "Take Quiz", take_quiz_path(quiz), method: :get, class: 'custom-button-table'
 
-= button_to 'Create Quiz', new_quiz_path, method: :get, class: 'custom-button'
+// if site visitor is loged in and he is admin. He can see Create Quiz button
+- if current_user && current_user.is_admin?
+  = button_to 'Create Quiz', new_quiz_path, method: :get, class: 'custom-button'

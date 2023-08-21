@@ -14,7 +14,9 @@ div.content-container
         li = link_to q.content, quiz_question_path(@quiz, q)
 
     .button-container
-      = button_to 'Add Question', new_quiz_question_path(@quiz), method: :get, class: 'custom-button'
-      = button_to 'Edit Quiz', edit_quiz_path(@quiz), method: :get, class: 'custom-button'
-      = button_to "Destroy Quiz", @quiz, method: :delete, class: 'custom-button'
+      // if site visitor is loged in and he is admin. He can see 3 buttons below
+      - if current_user && current_user.is_admin?
+        = button_to 'Add Question', new_quiz_question_path(@quiz), method: :get, class: 'custom-button'
+        = button_to 'Edit Quiz', edit_quiz_path(@quiz), method: :get, class: 'custom-button'
+        = button_to "Destroy Quiz", @quiz, method: :delete, class: 'custom-button'
       = button_to 'Back Quizzes', quizzes_path, method: :get, class: 'custom-button'
