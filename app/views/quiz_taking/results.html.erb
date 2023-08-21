@@ -1,0 +1,50 @@
+<div class="content-container">
+  <h1>Your Quiz Results</h1>
+
+  <% if @score.is_a?(Integer) %>
+    <h2>Your Score: <%= @score %></h2>
+
+    <ul>
+      <% @results.each do |result| %>
+        <li>
+          <h3><%= result[:question]["content"] %></h3>
+          <% class_name = result[:correct] ? 'correct' : 'incorrect' %>
+          <p class="<%= class_name %>">
+            <%= result[:correct] ? 'Correct!' : 'Incorrect!' %>
+            <% unless result[:correct] %>
+              <span class="<%= class_name %>">Your Answer:</span>
+              <span><%= session["quiz_#{params[:id]}_user_answers"]["q#{result[:question]["id"]}_answer"] %></span>
+            <% end %>
+          </p>
+          <p>
+            <span class="<%= class_name %>">Correct Answer:</span>
+            <span class="<%= class_name %>"><%= result[:question]["answer"] %></span>
+          </p>
+        </li>
+      <% end %>
+    </ul>
+
+    <p>Share your results with others:</p>
+    <input id="results-link" type="text" value="<%= request.original_url %>" readonly>
+    <button id="copy-link-button">Copy Link</button>
+
+    <%= button_to 'Back to Quizzes', quizzes_path, method: :get, class: 'custom-button' %>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const copyLinkButton = document.getElementById('copy-link-button');
+        const resultsLinkInput = document.getElementById('results-link');
+        
+        copyLinkButton.addEventListener('click', function() {
+          resultsLinkInput.select();
+          document.execCommand('copy');
+        });
+      });
+    </script>
+
+  <% else %>
+    <p>Are you ready to see your results?</p>
+
+    <%= button_to 'View Quiz Results', quiz_results_path(@quiz), method: :get, class: 'custom-button' %>
+  <% end %>
+</div>

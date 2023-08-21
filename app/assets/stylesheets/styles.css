@@ -9,6 +9,21 @@ body {
   font-family: 'Roboto Slab', serif;
 }
 
+.index-title {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+.index-description  {
+  text-align: center;
+  padding-left: 220px;
+  padding-right: 220px;
+  padding-bottom: 10px;
+  color: rgba(0, 204, 255);
+  text-shadow: 1px 1px 2px rgb(255, 0, 170, 0.918);
+
+}
+
 h1 {
   margin-bottom: 50px;
   text-shadow: 2px 2px 4px rgba(0, 204, 255);
@@ -48,6 +63,17 @@ li a:visited {
   box-shadow: 0px 0px 10px rgba(0, 204, 255);
   border-radius: 20px;
   margin: 20px;
+}
+
+.login-container {
+  flex-direction: column;
+  position: absolute; top: 10px; right: 10px;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid var(--code, rgb(255, 0, 170, 0.918));
+  background-color: #222222;
+  box-shadow: 0px 0px 10px rgba(0, 204, 255);
+  border-radius: 20px;
 }
 
 .custom-button,
@@ -152,11 +178,10 @@ li a:visited {
   font-weight: bold;
 }
 
-/* Style for the quizzes table */
 .styled-table {
-  width: auto; /* Reset the width to "auto" to allow margin/padding */
+  width: auto;
   border-collapse: collapse;
-  margin: 0 auto; /* Center the table horizontally */
+  margin: 0 auto;
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -166,14 +191,13 @@ li a:visited {
 .styled-table td {
   padding: 10px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border: 1px solid rgb(2, 162, 202);
 }
 
 .styled-table th {
   background-color: #f2f2f2;
 }
 
-/* Style for the "Take Quiz" button */
 .custom-button-table {
   background-color: rgb(2, 162, 202);
   color: white;
@@ -184,22 +208,15 @@ li a:visited {
 }
 
 .custom-button-table:hover {
-  background-color: var(--code, rgb(255, 0, 170, 0.918));
+  background-color: var(--code, rgb(255, 0, 170, 0.918)); 
 }
 
- /* Remove underline and change color for regular links */
-a {
-  text-decoration: none; /* Remove underline */
-  color: rgba(255, 0, 170, 0.918); /* Change link color */
+.styled-link {
+  text-decoration: none;
+  color: rgba(255, 0, 170, 0.918);
 }
 
-/* Style visited links */
-a:visited {
-  color: rgba(248, 99, 174, 0.918); /* Change color for visited links */
-}
-
-/* Style links on hover */
-a:hover {
-  text-decoration: underline; /* Add underline on hover */
-  color: rgba(236, 18, 65, 0.918); /* Change color on hover */
+.styled-link:hover {
+  text-decoration: underline;
+  color: rgba(0, 204, 255);
 }

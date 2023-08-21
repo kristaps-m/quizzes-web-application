@@ -11,7 +11,7 @@ div.content-container
     h3 Questions
     ul
       - @quiz.questions.each do |q|
-        li = link_to q.content, quiz_question_path(@quiz, q)
+        li = link_to q.content, quiz_question_path(@quiz, q), class: 'styled-link'
 
     .button-container
       // if site visitor is loged in and he is admin. He can see 3 buttons below

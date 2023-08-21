@@ -1,4 +1,7 @@
-// new quizzes index table below
+h1.index-title Group4 Quizzes
+
+h2.index-description Welcome to Group4 Quizzes, your one-stop destination for knowledge exploration. Immerse yourself in a world of interactive quizzes spanning an array of subjects. Challenge your intellect, learn something new, and have fun along the way! Feel free to pick and choose and quiz you want to play, or create one yourself!
+
 table.styled-table
   thead
     tr
@@ -7,13 +10,13 @@ table.styled-table
       th Created At
       th Question Count
       th Description
-      th Take this Quiz
+      th Choose
 
   tbody
     - @quizzes.each do |quiz|
       tr
         //td = quiz.id
-        td = link_to quiz.title, quiz_path(quiz)
+        td = link_to quiz.title, quiz_path(quiz), class: 'styled-link'
         td = date_in_words(quiz.created_at)
         td = quiz.question_count
         td = quiz.description
