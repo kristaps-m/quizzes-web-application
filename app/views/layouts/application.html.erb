@@ -13,6 +13,7 @@
   </head>
 
 <body>
+  <%= render partial: 'shared/login_status_message' %>
   <%= render partial: 'shared/flash' %>
   <%= yield %>
   <%= render partial: 'shared/footer', locals: { years: 2023 } %>

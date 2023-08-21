@@ -57,3 +57,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "slim-rails", "~> 3.6"
+
+# User Authentication (Devise):
+gem 'devise'
+
+# Define and manage permissions for different user roles:
+gem 'cancancan'
