@@ -1,6 +1,7 @@
 div.login-container
     - if user_signed_in?
-        p Welcome, #{current_user.email}!
+        h3 Welcome, #{current_user.first_name} #{current_user.last_name}!
+        p #{current_user.email}
         = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'styled-link'
     - else
         p Please log in to become Admin or Guest.
