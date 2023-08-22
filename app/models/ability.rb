@@ -7,11 +7,15 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.is_admin?
       can :manage, :all
+    elsif user.persisted? # Check if user is registered and not a guest
+      can :manage, :all
+      # Allow managing quizzes and questions owned by the user
+      #can :manage, Quiz, user_id: user.id
+      #can :manage, Question, quiz: { user_id: user.id }
     else
       can :read, Quiz
       can :read, Question
       cannot :read, Question, correct_answer: nil # Allow reading questions with correct answers
-      # cannot :read, Question.correct_answer  # Restrict reading answers to questions
       # Add more permissions for non-admin users as needed
     end
     # Define abilities for the user here. For example:
