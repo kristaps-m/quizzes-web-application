@@ -1,6 +1,8 @@
 div.login-container
     - if user_signed_in?
         h3 Welcome, #{current_user.first_name} #{current_user.last_name}!
+        div style="background-color: #{current_user.is_admin ? 'green' : 'red'}; color: #f1f1f1; font-size: 0.9rem"
+          = current_user.is_admin ? "IS ADMIN" : "user"
         p #{current_user.email}
         = link_to "Edit Profile", edit_user_registration_path, class: 'styled-link'
         br
