@@ -23,5 +23,5 @@ table.styled-table
         td = button_to "Take Quiz", take_quiz_path(quiz), method: :get, class: 'custom-button-table'
 
 // if site visitor is loged in and he is admin. He can see Create Quiz button
-- if current_user && current_user.is_admin?
+- if current_user
   = button_to 'Create Quiz', new_quiz_path, method: :get, class: 'custom-button'
