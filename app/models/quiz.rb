@@ -1,5 +1,7 @@
 class Quiz < ApplicationRecord
     has_many :questions, dependent: :destroy
+    # bond with User
+    belongs_to :creator, class_name: "User", foreign_key: "user_id"
 
     has_one_attached :image
     attr_accessor :remove_image
@@ -21,8 +23,14 @@ end
 #  title       :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  user_id     :integer
 #
 # Indexes
 #
-#  index_quizzes_on_title  (title) UNIQUE
+#  index_quizzes_on_title    (title) UNIQUE
+#  index_quizzes_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  user_id  (user_id => users.id)
 #

@@ -94,7 +94,9 @@ ActiveRecord::Schema.define(version: 2023_08_22_185055) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "description"
+    t.integer "user_id"
     t.index ["title"], name: "index_quizzes_on_title", unique: true
+    t.index ["user_id"], name: "index_quizzes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -106,6 +108,8 @@ ActiveRecord::Schema.define(version: 2023_08_22_185055) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_admin"
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -118,4 +122,5 @@ ActiveRecord::Schema.define(version: 2023_08_22_185055) do
   add_foreign_key "choices", "questions"
   add_foreign_key "multiple_choice_questions", "quizzes"
   add_foreign_key "questions", "quizzes"
+  add_foreign_key "quizzes", "users"
 end

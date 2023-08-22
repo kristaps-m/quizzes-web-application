@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_many :quizzes, dependent: :destroy # bound with Created quiz
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
@@ -12,7 +13,9 @@ end
 #  id                     :integer          not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  first_name             :string
 #  is_admin               :boolean
+#  last_name              :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string

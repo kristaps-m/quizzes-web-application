@@ -11,6 +11,7 @@ table.styled-table
       th Question Count
       th Description
       th Choose
+      th Creator
 
   tbody
     - @quizzes.each do |quiz|
@@ -21,6 +22,9 @@ table.styled-table
         td = quiz.question_count
         td = quiz.description
         td = button_to "Take Quiz", take_quiz_path(quiz), method: :get, class: 'custom-button-table'
+        td
+          - if quiz.user_id.present?
+            = "#{quiz.creator.first_name}, #{quiz.creator.last_name}"
 
 // if site visitor is loged in and he is admin. He can see Create Quiz button
 - if current_user
