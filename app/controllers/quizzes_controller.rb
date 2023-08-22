@@ -14,7 +14,8 @@ class QuizzesController < ApplicationController
     end
 
     def create
-        @quiz = Quiz.new(quiz_params)
+        # @quiz = Quiz.new(quiz_params)
+        @quiz = current_user.quizzes.new(quiz_params)
         if @quiz.save
             redirect_to @quiz, notice: 'Hooray! You did it!'
         else
