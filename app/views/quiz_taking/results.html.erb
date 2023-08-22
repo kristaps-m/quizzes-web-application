@@ -23,7 +23,9 @@
         </li>
       <% end %>
     </ul>
-
+    <% if @quiz.creator.present? %>
+      <p style="background-color: crimson; color: #f1f1f1; font-size: 0.9rem">Quiz created by: <%= @quiz.creator.first_name %>, <%= @quiz.creator.last_name %></p>
+    <% end %>
     <p>Share your results with others:</p>
     <input id="results-link" type="text" value="<%= request.original_url %>" readonly>
     <button id="copy-link-button">Copy Link</button>
