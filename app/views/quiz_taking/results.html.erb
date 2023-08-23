@@ -13,12 +13,28 @@
             <%= result[:correct] ? 'Correct!' : 'Incorrect!' %>
             <% unless result[:correct] %>
               <span class="<%= class_name %>">Your Answer:</span>
-              <span><%= session["quiz_#{params[:id]}_user_answers"]["q#{result[:question]["id"]}_answer"] %></span>
+              <span>
+                <% if result[:question]["question_type"] == 'Multiple Choice' %>
+                  <% user_answer = session["quiz_#{params[:id]}_user_answers"]["q#{result[:question]["id"]}_answer"] %>
+                  <% unless user_answer.blank? %>
+                    <%= user_answer.join(', ') %>
+                  <% end %>
+                <% else %>
+                  <%= session["quiz_#{params[:id]}_user_answers"]["q#{result[:question]["id"]}_answer"] %>
+                <% end %>
+              </span>
             <% end %>
           </p>
           <p>
             <span class="<%= class_name %>">Correct Answer:</span>
-            <span class="<%= class_name %>"><%= result[:question]["answer"] %></span>
+            <span class="<%= class_name %>">
+                <% if result[:question]["question_type"] == 'Multiple Choice' %>
+                <% correct_choices = result[:question].answers.select(&:correct?).map(&:choice) %>
+                <%= correct_choices.join(', ') %>
+                <% else %>
+                <%= result[:question]["answer"] %>
+                <% end %>
+            </span>
           </p>
         </li>
       <% end %>

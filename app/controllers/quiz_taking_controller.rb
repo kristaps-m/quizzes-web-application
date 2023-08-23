@@ -7,17 +7,24 @@ class QuizTakingController < ApplicationController
 
   def submit
     user_answer = params[:user_answer]
-    save_user_answer(@current_question, user_answer)
 
-    if user_answer.blank?
-      flash[:alert] = 'Please enter an answer before submitting.'
-      redirect_to take_quiz_path(@quiz, current_question_index: @current_question_index)
-    elsif @current_question_index == @questions.length - 1
-      session[:quiz_score] = calculate_score
-      redirect_to quiz_results_path(@quiz)
-    else
-      redirect_to take_quiz_path(@quiz, current_question_index: @current_question_index + 1)
+    if @current_question.question_type == 'Multiple Choice'
+      selected_answers = Array(user_answer).reject(&:blank?)
+
+      if selected_answers.empty?
+        flash[:alert] = 'Please choose at least one answer before submitting.'
+      else
+        correct_answers = @current_question.answers.select(&:correct?).pluck
+      end
+    elsif @current_question.question_type == 'Single Answer'
+      if user_answer.blank?
+        flash[:alert] = 'Please enter an answer before submitting.'
+      else
+        correct_answer = @current_question.answers.find_by(correct: true)&.choice
+      end
     end
+    save_user_answer(@current_question, user_answer)
+    proceed_to_next_question
   end
 
   def results
@@ -33,6 +40,7 @@ class QuizTakingController < ApplicationController
     @questions = @quiz.questions
     @current_question_index = params[:current_question_index].to_i
     @current_question = @questions[@current_question_index]
+    puts "Question Type: #{@current_question.question_type}"
   end
 
   def save_user_answer(question, answer)
@@ -48,15 +56,37 @@ class QuizTakingController < ApplicationController
 
     @questions.each do |question|
       user_answer = user_answers["q#{question.id}_answer"]
-      if user_answer == question.answer
-        score += 1
-        results << { question: question, correct: true }
-      else
-        results << { question: question, correct: false }
+
+      if question.question_type == 'Multiple Choice'
+        correct_choices = question.answers.select(&:correct?).pluck(:choice)
+        user_choices = user_answer.is_a?(Array) ? user_answer : [user_answer]
+
+        if (correct_choices - user_choices).empty? && (user_choices - correct_choices).empty?
+          score += 1
+          results << { question: question, correct: true }
+        else
+          results << { question: question, correct: false }
+        end
+      elsif question.question_type == 'Single Answer'
+        if user_answer == question.answer
+          score += 1
+          results << { question: question, correct: true }
+        else
+          results << { question: question, correct: false }
+        end
       end
     end
 
     session[:quiz_score] = score
     results
+  end
+
+  def proceed_to_next_question
+    if @current_question_index == @questions.length - 1
+      session[:quiz_score] = calculate_score
+      redirect_to quiz_results_path(@quiz)
+    else
+      redirect_to take_quiz_path(@quiz, current_question_index: @current_question_index + 1)
+    end
   end
 end
