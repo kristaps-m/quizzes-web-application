@@ -27,8 +27,12 @@
       = q_form.check_box :_destroy, class: 'custom-checkbox'
       = q_form.label :_destroy, 'Remove Question', class: 'custom-checkbox-label'
 
-  div
-    = form.button 'Create Question', name: :add_question, value: '1', class: 'custom-button'
+  - if current_user && (current_user.id == @quiz.user_id || current_user.is_admin)
+    div
+      = form.button 'Create Question', name: :add_question, value: '1', class: 'custom-button'
 
-  div
-    = form.submit 'Update Quiz', class: 'custom-button'
+    div
+      = form.submit 'Update Quiz', class: 'custom-button'
+  //- else
+  //  div
+  //    = form.submit 'Update Quiz', class: 'custom-button'

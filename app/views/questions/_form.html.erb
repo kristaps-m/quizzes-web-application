@@ -39,8 +39,9 @@
       <%= link_to "Add Choice", "#", class: "add-choice-button" %>
     </div>
   </div>
-
-  <%= form.submit 'Create Question', class: 'custom-button' %>
+  <% if current_user && (current_user.id == @quiz.user_id || current_user.is_admin) %>
+    <%= form.submit 'Create Question', class: 'custom-button' %>
+  <% end %>
 <% end %>
 
 <script>
