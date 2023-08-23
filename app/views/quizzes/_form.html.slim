@@ -1,7 +1,8 @@
 - quiz.errors.full_messages.each do |error|
-  p(style="color: rgba(0, 204, 255)") = error
+  p style="color: rgba(0, 204, 255)"
+    = error
 
-= form_with model: quiz do |form|
+= form_with(model: quiz) do |form|
   = form.label :title, 'Title', class: 'form-label'
   = form.text_field :title, class: 'form-style'
 
@@ -21,18 +22,21 @@
       = q_form.label :content, 'Content', class: 'form-label'
       = q_form.text_field :content, class: 'form-style'
 
-      = q_form.label :answer, 'Answer', class: 'form-label'
-      = q_form.text_field :answer, class: 'form-style'
+      - if q_form.object.question_type == 'Single Answer'
+        = q_form.label :answer, 'Answer', class: 'form-label'
+        = q_form.text_field :answer, class: 'form-style'
+      - elsif q_form.object.question_type == 'Multiple Choice'
+        = q_form.fields_for :answers, q_form.object.answers do |a_form|
+          .answer-fieldset
+            = a_form.label :choice, 'Choice', class: 'form-label'
+            = a_form.text_field :choice, class: 'form-style'
+            = a_form.label :correct, 'Correct', class: 'form-label'
+            = a_form.check_box :correct
+            = a_form.hidden_field :id
 
       = q_form.check_box :_destroy, class: 'custom-checkbox'
       = q_form.label :_destroy, 'Remove Question', class: 'custom-checkbox-label'
 
   - if current_user && (current_user.id == @quiz.user_id || current_user.is_admin)
     div
-      = form.button 'Create Question', name: :add_question, value: '1', class: 'custom-button'
-
-    div
       = form.submit 'Update Quiz', class: 'custom-button'
-  //- else
-  //  div
-  //    = form.submit 'Update Quiz', class: 'custom-button'
