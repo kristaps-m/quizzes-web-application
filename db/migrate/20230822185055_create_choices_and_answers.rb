@@ -30,5 +30,7 @@ class CreateChoicesAndAnswers < ActiveRecord::Migration[6.1]
       t.string 'content'
       t.integer 'correct_choice_id'
     end
+
+    add_column :questions, :question_type, :string
   end
 end
