@@ -26,6 +26,6 @@ table.styled-table
           - if quiz.user_id.present?
             = "#{quiz.creator.first_name}, #{quiz.creator.last_name}"
 
-// if site visitor is loged in and he is admin. He can see Create Quiz button
+// if site visitor is loged. He can see Create Quiz button
 - if current_user
   = button_to 'Create Quiz', new_quiz_path, method: :get, class: 'custom-button'

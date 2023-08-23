@@ -7,7 +7,8 @@ div.login-container
         = link_to "Edit Profile", edit_user_registration_path, class: 'styled-link'
         br
         br
-        = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'styled-link'        
+        = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'styled-link'     
+        = button_to "Toggle Admin", toggle_admin_user_path(current_user), method: :post, class: 'styled-button'   
     - else
         p Please log in to become Admin or Guest.
         = link_to 'Log in', new_user_session_path, class: 'styled-link'
