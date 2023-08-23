@@ -2,12 +2,13 @@
 #
 # Table name: questions
 #
-#  id         :integer          not null, primary key
-#  answer     :string           not null
-#  content    :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  quiz_id    :integer
+#  id            :integer          not null, primary key
+#  answer        :string           not null
+#  content       :string           not null
+#  question_type :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  quiz_id       :integer
 #
 # Indexes
 #

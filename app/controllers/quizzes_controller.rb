@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-    before_action :authorize_user, except: [:index, :show] # Added because of authenticate!
+    before_action :authorize_user, except: [:index, :show]
     before_action :load_quiz, except: [:index, :create, :new]
   
     def index
