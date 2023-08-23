@@ -8,15 +8,11 @@
 #  correct     :boolean
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  question_id :integer          not null
+#  question_id :integer
 #
 # Indexes
 #
 #  index_answers_on_question_id  (question_id)
-#
-# Foreign Keys
-#
-#  question_id  (question_id => questions.id)
 #
 require "test_helper"
 
