@@ -2,13 +2,13 @@ class QuizStatistic < ApplicationRecord
   belongs_to :user
   belongs_to :quiz, foreign_key: :test_id, class_name: 'Quiz'
 
-  before_validation :set_user_id_if_not_logged_in
+  # before_validation :set_user_id_if_not_logged_in
   
-  private
+  # private
 
-  def set_user_id_if_not_logged_in
-    self.user_id = current_user&.id || -1
-  end
+  # def set_user_id_if_not_logged_in
+  #   self.user_id = current_user&.id || -1
+  # end
 end
 
 # == Schema Information
