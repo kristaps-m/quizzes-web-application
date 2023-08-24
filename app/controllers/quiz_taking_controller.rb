@@ -14,11 +14,11 @@ class QuizTakingController < ApplicationController
 
     if user_answer.blank?
       flash[:alert] = 'Please choose or enter an answer before submitting.'
+      redirect_to take_quiz_path(@quiz, current_question_index: @current_question_index)
     else
       @quiz_progression_handler.save_user_answer(@current_question, user_answer)
+      redirect_to @quiz_progression_handler.next_question_path
     end
-
-    redirect_to @quiz_progression_handler.next_question_path
   end
 
   def results
@@ -35,15 +35,14 @@ class QuizTakingController < ApplicationController
     @current_question_index = params[:current_question_index].to_i
     @current_question = @questions[@current_question_index]
     session["quiz_#{params[:id]}_user_answers"] ||= {}
-    @quiz_progression_handler = QuizProgressionHandler.new(params[:id], @current_question_index, session["quiz_#{params[:id]}_user_answers"], self)
+    @quiz_progression_handler = QuizProgressionHandler.new(params[:id], @current_question_index,
+                                                           session["quiz_#{params[:id]}_user_answers"], self)
   end
 
   def proceed_to_next_question
     if @current_question_index == @questions.length - 1
       session[:quiz_score] = calculate_score
-      if user_signed_in?
-        save_quiz_statistic
-      end
+      save_quiz_statistic if user_signed_in?
       redirect_to quiz_results_path(@quiz)
     else
       redirect_to take_quiz_path(@quiz, current_question_index: @current_question_index + 1)
@@ -63,7 +62,7 @@ class QuizTakingController < ApplicationController
     if quiz_statistic.save
       flash[:success] = 'Quiz statistic saved successfully!'
     else
-      flash[:alert] = "Failed to save quiz statistic"
+      flash[:alert] = 'Failed to save quiz statistic'
     end
   end
 end
