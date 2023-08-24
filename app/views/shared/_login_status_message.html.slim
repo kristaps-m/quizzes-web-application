@@ -8,6 +8,9 @@ div.login-container
         br
         br
         = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'styled-link'
+        br
+        - if user_signed_in?
+          = link_to 'View Quiz Statistics', quiz_statistics_path, class: 'styled-link'
     - else
         p Please log in to become Admin or Guest.
         = link_to 'Log in', new_user_session_path, class: 'styled-link'

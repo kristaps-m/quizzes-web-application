@@ -1,0 +1,44 @@
+# == Schema Information
+#
+# Table name: quiz_statistics
+#
+#  id               :integer          not null, primary key
+#  correct_answers  :integer
+#  total_questions  :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  creator_id       :integer
+#  quiz_finisher_id :integer
+#  test_id          :integer
+#  user_id          :integer
+#
+# Indexes
+#
+#  index_quiz_statistics_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  user_id  (user_id => users.id)
+#
+
+one:
+  test_id: 1
+  test_title: MyString
+  creator_id: 1
+  creator_first_name: MyString
+  creator_last_name: MyString
+  creator_email: MyString
+  quiz_take_date: 2023-08-23 15:55:51
+  correct_answers: 1
+  total_questions: 1
+
+two:
+  test_id: 1
+  test_title: MyString
+  creator_id: 1
+  creator_first_name: MyString
+  creator_last_name: MyString
+  creator_email: MyString
+  quiz_take_date: 2023-08-23 15:55:51
+  correct_answers: 1
+  total_questions: 1

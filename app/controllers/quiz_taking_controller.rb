@@ -5,6 +5,10 @@ class QuizTakingController < ApplicationController
     @current_question = @questions[@current_question_index]
   end
 
+  def new
+    @quiz_statistic = QuizStatistic.new
+  end
+
   def submit
     user_answer = params[:user_answer]
 
@@ -25,12 +29,41 @@ class QuizTakingController < ApplicationController
 
   private
 
-def load_quiz_and_questions
-  @quiz = Quiz.find(params[:id])
-  @questions = @quiz.questions
-  @current_question_index = params[:current_question_index].to_i
-  @current_question = @questions[@current_question_index]
-  session["quiz_#{params[:id]}_user_answers"] ||= {}
-  @quiz_progression_handler = QuizProgressionHandler.new(params[:id], @current_question_index, session["quiz_#{params[:id]}_user_answers"], self)
-end
+  def load_quiz_and_questions
+    @quiz = Quiz.find(params[:id])
+    @questions = @quiz.questions
+    @current_question_index = params[:current_question_index].to_i
+    @current_question = @questions[@current_question_index]
+    session["quiz_#{params[:id]}_user_answers"] ||= {}
+    @quiz_progression_handler = QuizProgressionHandler.new(params[:id], @current_question_index, session["quiz_#{params[:id]}_user_answers"], self)
+  end
+
+  def proceed_to_next_question
+    if @current_question_index == @questions.length - 1
+      session[:quiz_score] = calculate_score
+      if user_signed_in?
+        save_quiz_statistic
+      end
+      redirect_to quiz_results_path(@quiz)
+    else
+      redirect_to take_quiz_path(@quiz, current_question_index: @current_question_index + 1)
+    end
+  end
+
+  def save_quiz_statistic
+    quiz_statistic = QuizStatistic.new(
+      test_id: @quiz.id,
+      creator_id: @quiz.creator.id,
+      correct_answers: session[:quiz_score],
+      total_questions: @questions.length,
+      quiz_finisher_id: current_user.id,
+      user_id: current_user.id
+    )
+
+    if quiz_statistic.save
+      flash[:alert] = 'Quiz statistic saved successfully!'
+    else
+      flash[:alert] = "Failed to save quiz statistic"
+    end
+  end
 end

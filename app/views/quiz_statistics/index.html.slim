@@ -1,0 +1,25 @@
+h1 Quiz Statistics
+
+table.table
+  thead
+    tr
+      th Test ID
+      th Test Title
+      th Creator ID
+      th Creator Firstname
+      th Correct Answers
+      th Total Questions
+      th Quiz Finisher ID
+      //th Actions
+  tbody
+    - @quiz_statistics.each do |quiz_statistic|
+      tr
+        td= quiz_statistic.test_id
+        td= quiz_statistic.quiz.title
+        td= quiz_statistic.creator_id
+        td = quiz_statistic.user.first_name
+        td= quiz_statistic.correct_answers
+        td= quiz_statistic.total_questions
+        td= quiz_statistic.quiz_finisher_id
+        //td
+        //  = link_to 'View', quiz_statistic_path(quiz_statistic)
