@@ -44,7 +44,6 @@ class QuizTakingController < ApplicationController
     @questions = @quiz.questions
     @current_question_index = params[:current_question_index].to_i
     @current_question = @questions[@current_question_index]
-    puts "Question Type: #{@current_question.question_type}"
   end
 
   def save_user_answer(question, answer)

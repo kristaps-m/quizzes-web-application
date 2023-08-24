@@ -1,0 +1,22 @@
+.content-container
+  - if @current_question.present?
+    h3 Question #{@current_question_index + 1}
+    p = @current_question.content
+
+    = form_with(url: submit_quiz_path(@quiz), method: :post, remote: true) do |form|
+      = csrf_meta_tags
+      = form.hidden_field :current_question_index, value: @current_question_index
+
+      - if @current_question.question_type == 'Multiple Choice'
+        ul
+          - @current_question.answers.each do |answer|
+            li
+              label
+                = check_box_tag 'user_answer[]', answer.choice
+                = answer.choice
+      - else
+        = form.text_field :user_answer, placeholder: "Your answer", class: 'form-style'
+
+      = form.submit "Submit Answer", class: 'custom-button'
+
+    = button_to 'Back to Quizzes', quizzes_path, method: :get, class: 'custom-button'
