@@ -5,6 +5,10 @@ class QuizTakingController < ApplicationController
     @current_question = @questions[@current_question_index]
   end
 
+  def new
+    @quiz_statistic = QuizStatistic.new
+  end
+
   def submit
     user_answer = params[:user_answer]
 
@@ -83,9 +87,32 @@ class QuizTakingController < ApplicationController
   def proceed_to_next_question
     if @current_question_index == @questions.length - 1
       session[:quiz_score] = calculate_score
+      if user_signed_in? # Check if the user is logged in
+        save_quiz_statistic # Call the method to save the quiz statistic
+      end
       redirect_to quiz_results_path(@quiz)
     else
       redirect_to take_quiz_path(@quiz, current_question_index: @current_question_index + 1)
     end
   end
+
+  def save_quiz_statistic
+    # Logic to save quiz statistics to the database
+    quiz_statistic = QuizStatistic.new(
+      test_id: @quiz.id,
+      creator_id: @quiz.creator.id,
+      correct_answers: session[:quiz_score],
+      total_questions: @questions.length,
+      quiz_finisher_id: current_user.id,
+      user_id: current_user.id
+    )
+  
+    if quiz_statistic.save
+      # Optionally, you can add a flash message here
+      flash[:alert] = 'Quiz statistic saved successfully!'
+    else
+      flash[:alert] = "Failed to save quiz statistic"
+    end
+  end
+  
 end
