@@ -88,7 +88,9 @@ class QuizTakingController < ApplicationController
   def proceed_to_next_question
     if @current_question_index == @questions.length - 1
       session[:quiz_score] = calculate_score
-      save_quiz_statistic # Call the save_quiz_statistic method here
+      if user_signed_in? # Check if the user is logged in
+        save_quiz_statistic # Call the method to save the quiz statistic
+      end
       redirect_to quiz_results_path(@quiz)
     else
       redirect_to take_quiz_path(@quiz, current_question_index: @current_question_index + 1)

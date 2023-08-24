@@ -28,6 +28,6 @@ class QuizStatisticsController < ApplicationController
   private
 
   def quiz_statistic_params
-    params.require(:quiz_statistic).permit(:test_id, :creator_id, :quiz_take_date, :correct_answers, :total_questions)
+    params.require(:quiz_statistic).permit(:test_id, :creator_id, :quiz_take_date, :correct_answers, :total_questions, :user_id)
   end
 end
