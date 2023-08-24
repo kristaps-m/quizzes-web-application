@@ -30,8 +30,8 @@
           .answer-fieldset
             = a_form.label :choice, 'Choice', class: 'form-label'
             = a_form.text_field :choice, class: 'form-style'
-            = a_form.label :correct, 'Correct', class: 'form-label'
-            = a_form.check_box :correct
+            = a_form.check_box :correct, class: 'custom-checkbox'
+            = a_form.label :correct, 'Correct', class: 'custom-checkbox-label'
             = a_form.hidden_field :id
 
       = q_form.check_box :_destroy, class: 'custom-checkbox'

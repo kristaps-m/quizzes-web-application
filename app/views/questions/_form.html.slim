@@ -6,7 +6,7 @@
 
   .form-fields
     = form.label :question_type, 'Select Question Type:'
-    = form.select :question_type, options_for_select(['Single Answer', 'Multiple Choice']), class: 'form-style', id: 'question_type_select'
+    = form.select :question_type, options_for_select(['Single Answer', 'Multiple Choice']), id: 'question_type_select'
 
   .form-fields
     = form.label :content
@@ -16,7 +16,7 @@
     = form.label :answer
     = form.text_area :answer, class: 'form-style'
 
-  .form-fields.multiple-choice style="display: none;"
+  .form-fields.multiple-choice
     = form.fields_for :answers do |answer_form|
       fieldset.choice-fields
         div
@@ -28,7 +28,7 @@
           = answer_form.check_box :correct
 
     .add-choice-container
-      = link_to "Add Choice", "#", class: "add-choice-button"
+      = link_to "Add Choice", "#", class: "add-choice-button styled-link"
 
   - if current_user && (current_user.id == @quiz.user_id || current_user.is_admin)
     = form.submit 'Create Question', class: 'custom-button'

@@ -1,6 +1,12 @@
 .content-container
   h1 Your Quiz Results
 
+  - if @quiz.creator.present?
+  p 
+      | Quiz created by: 
+      = @quiz.creator.first_name
+      = @quiz.creator.last_name
+
   - if @score.is_a?(Integer)
     h2 Your Score: #{@score}
 
@@ -10,14 +16,15 @@
           h3 = result[:question]["content"]
           - class_name = result[:correct] ? 'correct' : 'incorrect'
           p class="#{class_name}"
-            = result[:correct] ? 'Correct!' : 'Incorrect!'
+            = result[:correct] ? 'Correct! ' : 'Incorrect! '
             - unless result[:correct]
-              span class="#{class_name}" Your Answer:
+              span class="#{class_name}" Your Answer: 
               span
                 - if result[:question]["question_type"] == 'Multiple Choice'
-                  - user_answer = session["quiz_#{params[:id]}_user_answers"]["q#{result[:question]["id"]}_answer"]
-                  - unless user_answer.blank?
-                    = user_answer.join(', ')
+                  - if session["quiz_#{params[:id]}_user_answers"].present?
+                    - user_answer = session["quiz_#{params[:id]}_user_answers"]["q#{result[:question]["id"]}_answer"]
+                    - unless user_answer.blank?
+                        = user_answer.join(', ')
                 - else
                   = session["quiz_#{params[:id]}_user_answers"]["q#{result[:question]["id"]}_answer"]
           p
@@ -28,12 +35,6 @@
                 = correct_choices.join(', ')
               - else
                 = result[:question]["answer"]
-
-    - if @quiz.creator.present?
-      p style="background-color: crimson; color: #f1f1f1; font-size: 0.9rem" 
-        | Quiz created by: 
-        = @quiz.creator.first_name
-        = @quiz.creator.last_name
 
     p Share your results with others:
     input#results-link type="text" value="#{request.original_url}"
