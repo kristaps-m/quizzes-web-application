@@ -5,9 +5,9 @@ class QuizStatisticsController < ApplicationController
     @quiz_statistics = current_user.quiz_statistics
   end
 
-  def new
-    @quiz_statistic = QuizStatistic.new
-  end
+  # def new
+  #   @quiz_statistic = QuizStatistic.new
+  # end
 
   def create
     # @quiz_statistic = current_user.quiz_statistics.new(quiz_statistic_params)
@@ -25,6 +25,6 @@ class QuizStatisticsController < ApplicationController
   private
 
   def quiz_statistic_params
-    params.require(:quiz_statistic).permit(:test_id, :test_title, :creator_id, :creator_first_name, :creator_last_name, :creator_email, :quiz_take_date, :correct_answers, :total_questions)
+    params.require(:quiz_statistic).permit(:test_id, :creator_id, :quiz_take_date, :correct_answers, :total_questions)
   end
 end

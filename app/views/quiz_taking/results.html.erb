@@ -93,7 +93,7 @@
 
   <% else %>
     <p>Are you ready to see your results?</p>
-      <%= form_with url: quiz_statistics_path, method: :post, class: 'custom-form' do |form| %>
+      <%= form_with model: @quiz_statistic, url: quiz_statistics_path, class: 'custom-form' do |form| %>
   <%= form.hidden_field :test_id, value: @quiz.id.to_i %>
   <%= form.hidden_field :test_title, value: @quiz.title %>
   <%= form.hidden_field :creator_id, value: @quiz.creator.id.to_i %>
@@ -107,6 +107,61 @@
   
   <%= form.submit 'V.Q.R+create+save', class: 'custom-button' %>
 <% end %>
+
+
+  <%# MANUALY TYPE IT IN %>
+  <%= form_with model: @quiz_statistic, url: quiz_statistics_path, class: 'custom-form' do |form| %>
+  <div>
+    <%= form.label :test_id %>
+    <%= form.number_field :test_id %>
+  </div>
+  
+  <div>
+    <%= form.label :test_title %>
+    <%= form.text_field :test_title %>
+  </div>
+  
+  <div>
+    <%= form.label :creator_id %>
+    <%= form.number_field :creator_id %>
+  </div>
+  
+  <div>
+    <%= form.label :creator_first_name %>
+    <%= form.text_field :creator_first_name %>
+  </div>
+  
+  <div>
+    <%= form.label :creator_last_name %>
+    <%= form.text_field :creator_last_name %>
+  </div>
+  
+  <div>
+    <%= form.label :creator_email %>
+    <%= form.email_field :creator_email %>
+  </div>
+  
+  <div>
+    <%= form.label :quiz_take_date %>
+    <%= form.datetime_field :quiz_take_date %>
+  </div>
+  
+  <div>
+    <%= form.label :correct_answers %>
+    <%= form.number_field :correct_answers %>
+  </div>
+  
+  <div>
+    <%= form.label :total_questions %>
+    <%= form.number_field :total_questions %>
+  </div>
+  
+  <div>
+    <%= form.submit 'V.Q.R+manualy', class: 'custom-button' %>
+  </div>
+<% end %>
+
+  <%#  %>
 
     <%= button_to 'View Quiz Results', quiz_results_path(@quiz), method: :get, class: 'custom-button' %>
   <% end %>

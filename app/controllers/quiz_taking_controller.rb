@@ -5,6 +5,10 @@ class QuizTakingController < ApplicationController
     @current_question = @questions[@current_question_index]
   end
 
+  def new
+    @quiz_statistic = QuizStatistic.new
+  end
+
   def submit
     user_answer = params[:user_answer]
 

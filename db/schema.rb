@@ -91,14 +91,10 @@ ActiveRecord::Schema.define(version: 2023_08_23_195551) do
 
   create_table "quiz_statistics", force: :cascade do |t|
     t.integer "test_id"
-    t.string "test_title"
     t.integer "creator_id"
-    t.string "creator_first_name"
-    t.string "creator_last_name"
-    t.string "creator_email"
-    t.datetime "quiz_take_date"
     t.integer "correct_answers"
     t.integer "total_questions"
+    t.integer "quiz_finisher_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
