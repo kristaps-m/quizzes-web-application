@@ -19,8 +19,8 @@ class QuizProgressionHandler
   def proceed_to_next_question
     if @current_question_index == @questions.length - 1
       session[:quiz_score] = calculate_score
-      if user_signed_in? # Check if the user is logged in
-        save_quiz_statistic # Call the method to save the quiz statistic
+      if user_signed_in?
+        save_quiz_statistic
       end
       redirect_to quiz_results_path(@quiz)
     else
