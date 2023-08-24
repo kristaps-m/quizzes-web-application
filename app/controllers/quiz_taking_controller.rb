@@ -61,7 +61,7 @@ class QuizTakingController < ApplicationController
     )
 
     if quiz_statistic.save
-      flash[:alert] = 'Quiz statistic saved successfully!'
+      flash[:success] = 'Quiz statistic saved successfully!'
     else
       flash[:alert] = "Failed to save quiz statistic"
     end

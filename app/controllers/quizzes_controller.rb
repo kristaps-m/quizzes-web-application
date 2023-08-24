@@ -1,13 +1,12 @@
 class QuizzesController < ApplicationController
-  before_action :authorize_user, except: [:index, :show]
-  before_action :load_quiz, except: [:index, :create, :new]
+  before_action :authorize_user, except: %i[index show]
+  before_action :load_quiz, except: %i[index create new]
 
   def index
     @quizzes = Quiz.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @quiz = Quiz.new
@@ -17,15 +16,15 @@ class QuizzesController < ApplicationController
     @quiz = current_user.quizzes.new(quiz_params)
 
     if @quiz.save
-      redirect_to @quiz, notice: 'Hooray! You did it!'
+      flash[:success] = 'Hooray! You did it!'
+      redirect_to @quiz
     else
-      flash.now.alert = 'Sorry, something went wrong..'
+      flash[:alert] = 'Sorry, something went wrong..'
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if params[:add_question]
