@@ -42,6 +42,37 @@
     <% if @quiz.creator.present? %>
       <p style="background-color: crimson; color: #f1f1f1; font-size: 0.9rem">Quiz created by: <%= @quiz.creator.first_name %>, <%= @quiz.creator.last_name %></p>
     <% end %>
+    <%# Big quiz creator and info table %>
+    <table style="font-size: 12px;">
+      <thead>
+        <tr>
+          <th>Test ID</th>
+          <th>Test Title</th>
+          <th>Creator ID</th>
+          <th>Creator First Name</th>
+          <th>Creator Last Name</th>
+          <th>Creator e-mail</th>
+          <th>Quiz Take Date / Quiz created_at</th>
+          <th>Correct Answers</th>
+          <th>Total Questions</th>
+        </tr>
+      </thead>
+      <tbody>        
+        <tr>
+          <td><%= @quiz.id %></td>
+          <td><%= @quiz.title %></td>
+          <td><%= @quiz.creator.id %></td>
+          <td><%= @quiz.creator.first_name %></td>
+          <td><%= @quiz.creator.last_name %></td>
+          <td><%= @quiz.creator.email %></td>
+          <td>Current Datetime: <%= Time.now.strftime('%Y-%m-%d %H:%M:%S') %></td>
+          <td><%= @score %></td>
+          <td><%= @quiz.question_count %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <%# Time.now %>
     <p>Share your results with others:</p>
     <input id="results-link" type="text" value="<%= request.original_url %>" readonly>
     <button id="copy-link-button">Copy Link</button>
@@ -62,6 +93,20 @@
 
   <% else %>
     <p>Are you ready to see your results?</p>
+      <%= form_with url: quiz_statistics_path, method: :post, class: 'custom-form' do |form| %>
+  <%= form.hidden_field :test_id, value: @quiz.id.to_i %>
+  <%= form.hidden_field :test_title, value: @quiz.title %>
+  <%= form.hidden_field :creator_id, value: @quiz.creator.id.to_i %>
+  <%= form.hidden_field :creator_first_name, value: @quiz.creator.first_name %>
+  <%= form.hidden_field :creator_last_name, value: @quiz.creator.last_name %>
+  <%= form.hidden_field :creator_email, value: @quiz.creator.email %>
+  <%# @quiz.created_at = Time.now, 1 = @score%>
+  <%= form.hidden_field :quiz_take_date, value: @quiz.created_at %>
+  <%= form.hidden_field :correct_answers, value: "1".to_i %>
+  <%= form.hidden_field :total_questions, value: @quiz.question_count.to_i %>
+  
+  <%= form.submit 'V.Q.R+create+save', class: 'custom-button' %>
+<% end %>
 
     <%= button_to 'View Quiz Results', quiz_results_path(@quiz), method: :get, class: 'custom-button' %>
   <% end %>
