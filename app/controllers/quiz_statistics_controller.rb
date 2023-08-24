@@ -9,6 +9,9 @@ class QuizStatisticsController < ApplicationController
   #   @quiz_statistic = QuizStatistic.new
   # end
 
+  def show
+  end
+
   def create
     # @quiz_statistic = current_user.quiz_statistics.new(quiz_statistic_params)
     @quiz_statistic = QuizStatistic.new(quiz_statistic_params)

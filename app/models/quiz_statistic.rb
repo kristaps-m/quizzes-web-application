@@ -1,4 +1,6 @@
 class QuizStatistic < ApplicationRecord
+  belongs_to :user
+  belongs_to :quiz, foreign_key: :test_id, class_name: 'Quiz'
 end
 
 # == Schema Information
@@ -13,4 +15,13 @@ end
 #  creator_id       :integer
 #  quiz_finisher_id :integer
 #  test_id          :integer
+#  user_id          :integer
+#
+# Indexes
+#
+#  index_quiz_statistics_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  user_id  (user_id => users.id)
 #
