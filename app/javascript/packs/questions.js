@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var multipleChoiceFields = document.querySelector('.form-fields.multiple-choice');
     var addChoiceButton = document.querySelector('.add-choice-button');
     var form = document.querySelector('form');
+    var questionTypeSelect = document.getElementById('question_question_type');
+    questionTypeSelect.classList.add('form-select');
 
     function toggleChoiceButtons() {
         if (questionTypeSelect.value === 'Single Answer') {
@@ -25,29 +27,31 @@ document.addEventListener('DOMContentLoaded', function () {
         var answerFieldset = document.createElement('fieldset');
 
         var choiceLabel = document.createElement('label');
-        choiceLabel.textContent = 'Choice:';
+        choiceLabel.textContent = 'Choice';
 
         var choiceInput = document.createElement('input');
         choiceInput.type = 'text';
         choiceInput.name = 'question[answers_attributes][][choice]';
         choiceInput.className = 'form-style';
 
-        var correctLabel = document.createElement('label');
-        correctLabel.textContent = 'Correct:';
-
         var correctCheckbox = document.createElement('input');
         correctCheckbox.type = 'checkbox';
         correctCheckbox.name = 'question[answers_attributes][][correct]';
+        correctCheckbox.className = 'custom-checkbox';
+
+        var correctLabel = document.createElement('label');
+        correctLabel.textContent = 'Correct';
+        correctLabel.className = 'custom-checkbox-label'
 
         answerFieldset.appendChild(choiceLabel);
         answerFieldset.appendChild(choiceInput);
-        answerFieldset.appendChild(correctLabel);
         answerFieldset.appendChild(correctCheckbox);
+        answerFieldset.appendChild(correctLabel);
 
         var removeChoiceButton = document.createElement('a');
         removeChoiceButton.href = '#';
         removeChoiceButton.textContent = 'Remove Choice';
-        removeChoiceButton.className = 'remove-choice-button';
+        removeChoiceButton.className = 'remove-choice-button styled-link';
 
         removeChoiceButton.addEventListener('click', function (event) {
             event.preventDefault();

@@ -11,8 +11,8 @@
         ul
           - @current_question.answers.each do |answer|
             li
-              label
-                = check_box_tag 'user_answer[]', answer.choice
+              label.custom-checkbox-label
+                = check_box_tag 'user_answer[]', answer.choice, false, class: 'custom-checkbox'
                 = answer.choice
       - else
         = form.text_field :user_answer, placeholder: "Your answer", class: 'form-style'

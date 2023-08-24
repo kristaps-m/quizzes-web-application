@@ -74,10 +74,12 @@ li a:visited {
   background-color: #222222;
   box-shadow: 0px 0px 10px rgba(0, 204, 255);
   border-radius: 20px;
+  max-width: 200px;
 }
 
 .custom-button,
-.custom-file-button {
+.custom-file-button,
+#copy-link-button {
   text-align: center;
   height: 50px;
   width: 200px;
@@ -111,35 +113,32 @@ li a:visited {
 
 .custom-button:hover,
 .custom-file-button:hover,
-.registration-button:hover {
-  background-color: var(--code, rgb(255, 0, 170, 0.918));
+.registration-button:hover,
+#copy-link-button:hover {
+  background-color: rgb(255, 0, 170, 0.918);
 }
 
 .custom-checkbox {
-  display: none;
+  display: inline-block;
+  background-color: transparent;
+  height: 18px;
+  width: 18px;
+  border: 2px solid rgba(0, 204, 255); 
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-bottom: 0;
+  appearance: none;
+}
+
+.custom-checkbox:checked {
+  background-color: rgba(0, 204, 255);
+  border-color: rgb(255, 0, 170, 0.918);
 }
 
 .custom-checkbox-label {
   cursor: pointer;
-  font-size: 16px;
-  margin-top: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.custom-checkbox-label::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  margin-right: 10px;
-  border: 2px solid rgba(0, 204, 255);
-  background-color: transparent;
-}
-
-.custom-checkbox:checked + .custom-checkbox-label::before {
-  background-color: rgba(0, 204, 255);
-  border-color: var(--code, rgb(255, 0, 170, 0.918));
+  font-size: 20px;
+  vertical-align: middle;
 }
 
 .form-style {
@@ -158,6 +157,23 @@ li a:visited {
   box-sizing: border-box;
   resize: vertical;
   font-family: 'Roboto Slab', serif;
+}
+
+.form-select {
+  height: 40px;
+  width: 150px;
+  font-size: 16px;
+  padding: 8px;
+  margin-left: 5px;
+  margin-bottom: 40px;
+  color: rgba(0, 204, 255);
+  border: 1px solid rgba(0, 204, 255);
+  border-radius: 5px;
+  background-color: #222222;
+}
+
+fieldset {
+  border: 2px solid rgb(2, 162, 202);
 }
 
 .alert {
@@ -186,11 +202,10 @@ li a:visited {
   margin-right: 10px;
 }
 
-
 .styled-table th,
 .styled-table td {
   padding: 10px;
-  text-align: left;
+  text-align: center;
   border: 1px solid rgb(2, 162, 202);
 }
 
@@ -201,6 +216,7 @@ li a:visited {
 .custom-button-table {
   background-color: rgb(2, 162, 202);
   color: white;
+  text-align: center;
   border: none;
   padding: 6px 12px;
   cursor: pointer;
@@ -214,9 +230,26 @@ li a:visited {
 .styled-link {
   text-decoration: none;
   color: rgba(255, 0, 170, 0.918);
+  display: block;
 }
 
 .styled-link:hover {
   text-decoration: underline;
   color: rgba(0, 204, 255);
+}
+
+.custom-link-form {
+    display: flex;
+    align-items: center;
+}
+
+#results-link {
+    flex: 1;
+    padding: 5px;
+    color: rgba(0, 204, 255);
+    border: 1px solid rgba(0, 204, 255);
+    border-radius: 5px;
+    background-color: #222222;
+    margin-right: 10px;
+    width: 100%;
 }
