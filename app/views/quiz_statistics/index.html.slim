@@ -1,14 +1,27 @@
 h1 Quiz Statistics
+br
+br
+br
+br
+br
+br
+br
+br
+br
+br
 
-table.table
+
+table.styled-table
   thead
     tr
       th Test ID
       th Test Title
       th Creator ID
-      th Creator Firstname
+      th Creator
       th Correct Answers
       th Total Questions
+      th Presentage
+      th Quiz Taken
       th Quiz Finisher ID
       //th Actions
   tbody
@@ -17,9 +30,11 @@ table.table
         td= quiz_statistic.test_id
         td= quiz_statistic.quiz.title
         td= quiz_statistic.creator_id
-        td = quiz_statistic.user.first_name
-        td= quiz_statistic.correct_answers
+        td= "#{quiz_statistic.quiz.creator.first_name.first}., #{quiz_statistic.quiz.creator.last_name}"
+        td= quiz_statistic.correct_answers.nil? ? 0 : quiz_statistic.correct_answers
         td= quiz_statistic.total_questions
+        td= (quiz_statistic.correct_answers.nil? ? 0 : quiz_statistic.correct_answers / quiz_statistic.total_questions.to_f * 100).round(2)
+        td= date_in_words(quiz_statistic.created_at)
         td= quiz_statistic.quiz_finisher_id
-        //td
-        //  = link_to 'View', quiz_statistic_path(quiz_statistic)
+
+= button_to 'Back to Quizzes', quizzes_path, method: :get, class: 'custom-button'

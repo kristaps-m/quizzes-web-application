@@ -37,6 +37,6 @@
       = q_form.check_box :_destroy, class: 'custom-checkbox'
       = q_form.label :_destroy, 'Remove Question', class: 'custom-checkbox-label'
 
-  - if current_user && (current_user.id == @quiz.user_id || current_user.is_admin)
+  - if current_user || (current_user.id == @quiz.user_id || current_user.is_admin)
     div
       = form.submit 'Update Quiz', class: 'custom-button'
