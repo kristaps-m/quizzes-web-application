@@ -5,6 +5,7 @@ h2.index-description Welcome to Group4 Quizzes, your one-stop destination for kn
 table.styled-table
   thead
     tr
+      //th Id
       th Title
       th Created At
       th Question Count
@@ -25,5 +26,6 @@ table.styled-table
           - if quiz.user_id.present?
             = "#{quiz.creator.first_name}, #{quiz.creator.last_name}"
 
+// if site visitor is loged. He can see Create Quiz button
 - if current_user
   = button_to 'Create Quiz', new_quiz_path, method: :get, class: 'custom-button'

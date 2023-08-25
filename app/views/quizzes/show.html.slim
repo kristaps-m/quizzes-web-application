@@ -1,16 +1,9 @@
 div.content-container
   h1 = @quiz.title
-  div.created
-    span Quiz created at: 
-    span = @quiz.created_at.strftime('%Y/%m/%d')
-
-    - if @quiz.creator.present?
-    p 
-        | Quiz created by: 
-        = @quiz.creator.first_name
-        = @quiz.creator.last_name
-
   div
+    span(style="font-size: 16px;") Quiz created at: 
+    span(style="font-size: 16px;") = @quiz.created_at.strftime('%Y/%m/%d')
+
     p = @quiz.description
     - if @quiz.image.attached?
         = image_tag @quiz.image, style: 'border: 2px solid #FF00AA;'
@@ -21,6 +14,8 @@ div.content-container
         li = link_to q.content, quiz_question_path(@quiz, q), class: 'styled-link'
 
     .button-container
+      // if site visitor is loged in and he is admin. He can see 3 buttons below
+      // if only user who created quiz can see 3 buttons below
       - if current_user && (current_user.id == @quiz.user_id || current_user.is_admin)
         = button_to 'Add Question', new_quiz_question_path(@quiz), method: :get, class: 'custom-button'
         = button_to 'Edit Quiz', edit_quiz_path(@quiz), method: :get, class: 'custom-button'

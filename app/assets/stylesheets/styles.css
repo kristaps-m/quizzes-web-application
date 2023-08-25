@@ -1,11 +1,6 @@
-:root {
-  --code1: rgba(0, 204, 255);
-  --code2: rgba(255, 0, 170, 0.918);
-}
-
 body {
   background-color: #1d1d1d;
-  color: var(--code2);
+  color: rgba(255, 0, 170, 0.918);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,14 +19,14 @@ body {
   padding-left: 220px;
   padding-right: 220px;
   padding-bottom: 10px;
-  color: var(--code1);
-  text-shadow: 1px 1px 2px var(--code2);
+  color: rgba(0, 204, 255);
+  text-shadow: 1px 1px 2px rgb(255, 0, 170, 0.918);
 
 }
 
 h1 {
   margin-bottom: 50px;
-  text-shadow: 2px 2px 4px var(--code1);
+  text-shadow: 2px 2px 4px rgba(0, 204, 255);
 }
 
 ul {
@@ -63,13 +58,11 @@ li a:visited {
   text-align: center;
   padding: 60px;
   font-size: 24px;
-  border: 1px solid var(--code2);
+  border: 1px solid var(--code, rgb(255, 0, 170, 0.918));
   background-color: #222222;
-  box-shadow: 0px 0px 10px var(--code1);
+  box-shadow: 0px 0px 10px rgba(0, 204, 255);
   border-radius: 20px;
   margin: 20px;
-  max-width: 1250px;
-  word-break: break-all;
 }
 
 .login-container {
@@ -77,9 +70,9 @@ li a:visited {
   position: absolute; top: 10px; right: 10px;
   text-align: center;
   padding: 10px;
-  border: 1px solid var(--code2);
+  border: 1px solid var(--code, rgb(255, 0, 170, 0.918));
   background-color: #222222;
-  box-shadow: 0px 0px 10px var(--code1);
+  box-shadow: 0px 0px 10px rgba(0, 204, 255);
   border-radius: 20px;
   max-width: 200px;
 }
@@ -92,7 +85,7 @@ li a:visited {
   width: 200px;
   padding: 10px;
   font-size: 20px;
-  background-color: var(--code1);
+  background-color: rgb(2, 162, 202);
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -108,7 +101,7 @@ li a:visited {
   width: 180px;
   padding: 10px;
   font-size: 20px;
-  background-color: var(--code1);
+  background-color: rgb(2, 162, 202);
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -122,7 +115,7 @@ li a:visited {
 .custom-file-button:hover,
 .registration-button:hover,
 #copy-link-button:hover {
-  background-color: var(--code2);
+  background-color: rgb(255, 0, 170, 0.918);
 }
 
 .custom-checkbox {
@@ -130,7 +123,7 @@ li a:visited {
   background-color: transparent;
   height: 18px;
   width: 18px;
-  border: 2px solid var(--code1);
+  border: 2px solid rgba(0, 204, 255); 
   vertical-align: middle;
   margin-right: 10px;
   margin-bottom: 0;
@@ -138,8 +131,8 @@ li a:visited {
 }
 
 .custom-checkbox:checked {
-  background-color: var(--code1);
-  border-color: var(--code2);
+  background-color: rgba(0, 204, 255);
+  border-color: rgb(255, 0, 170, 0.918);
 }
 
 .custom-checkbox-label {
@@ -155,9 +148,9 @@ li a:visited {
   align-items: center;
   margin: 10px auto 20px;
   padding: 10px;
-  color: var(--code1);
+  color: rgba(0, 204, 255);
   border-radius: 5px;
-  border: 1px solid var(--code1);
+  border: 1px solid rgba(0, 204, 255);
   font-size: 16px;
   background-color: #222222;
   width: 400px;
@@ -173,26 +166,26 @@ li a:visited {
   padding: 8px;
   margin-left: 5px;
   margin-bottom: 40px;
-  color: var(--code1);
-  border: 1px solid var(--code1);
+  color: rgba(0, 204, 255);
+  border: 1px solid rgba(0, 204, 255);
   border-radius: 5px;
   background-color: #222222;
 }
 
 fieldset {
-  border: 2px solid var(--code1);
+  border: 2px solid rgb(2, 162, 202);
 }
 
 .alert {
   border: 1px solid var(--code);
-  color: var(--code1);
-  box-shadow: 0px 0px 10px var(--code1);;
+  color: rgba(0, 204, 255);
+  box-shadow: 0px 0px 10px rgba(0, 204, 255);
   border-radius: 10px;
   padding: 10px;
 }
 
 .correct {
-  color: var(--code1);
+  color: rgba(0, 204, 255);
   font-weight: bold;
 }
 
@@ -213,7 +206,7 @@ fieldset {
 .styled-table td {
   padding: 10px;
   text-align: center;
-  border: 2px solid var(--code1);
+  border: 1px solid rgb(2, 162, 202);
 }
 
 .styled-table th {
@@ -221,7 +214,7 @@ fieldset {
 }
 
 .custom-button-table {
-  background-color: var(--code1);
+  background-color: rgb(2, 162, 202);
   color: white;
   text-align: center;
   border: none;
@@ -231,18 +224,18 @@ fieldset {
 }
 
 .custom-button-table:hover {
-  background-color: var(--code2);
+  background-color: var(--code, rgb(255, 0, 170, 0.918)); 
 }
 
 .styled-link {
   text-decoration: none;
-  color: var(--code2);
+  color: rgba(255, 0, 170, 0.918);
   display: block;
 }
 
 .styled-link:hover {
   text-decoration: underline;
-  color: var(--code1);
+  color: rgba(0, 204, 255);
 }
 
 .custom-link-form {
@@ -253,38 +246,10 @@ fieldset {
 #results-link {
     flex: 1;
     padding: 5px;
-    color: var(--code1);
-    border: 1px solid var(--code1);
+    color: rgba(0, 204, 255);
+    border: 1px solid rgba(0, 204, 255);
     border-radius: 5px;
     background-color: #222222;
     margin-right: 10px;
-    width: 50%;
-}
-
-.custom-file-input {
-  background-color: var(--code2);
-  color: #fff;
-  padding: 10px 20px;
-  margin-top: 10px;
-  border: 1px solid var(--code1);
-  cursor: pointer;
-  width: auto
-}
-
-.user-welcome {
-  background-color: var(--code2);
-  border: 1px solid var(--code1);
-  color: #f1f1f1;
-  font-size: 0.9rem;
-}
-
-.admin-welcome {
-  background-color: var(--code1);
-  border: 1px solid var(--code2);
-  color: #f1f1f1;
-  font-size: 0.9rem;
-}
-
-.created {
-  font-size: 16px;
+    width: 100%;
 }
