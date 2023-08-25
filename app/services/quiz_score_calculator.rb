@@ -22,10 +22,7 @@ class QuizScoreCalculator
           results << { question: question, correct: false }
         end
       elsif question.question_type == 'Single Answer'
-        user_answer = user_answer.upcase
-        correct_answer = question.answer.upcase
-
-        if user_answer == correct_answer
+        if user_answer == question.answer
           score += 1
           results << { question: question, correct: true }
         else

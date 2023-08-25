@@ -1,5 +1,6 @@
 class Quiz < ApplicationRecord
     has_many :questions, dependent: :destroy
+    # bond with User
     belongs_to :creator, class_name: "User", foreign_key: "user_id"
 
     has_one_attached :image

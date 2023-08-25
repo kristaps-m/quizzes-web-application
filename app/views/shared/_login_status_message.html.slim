@@ -1,19 +1,16 @@
 div.login-container
-  - if user_signed_in?
-    h3 Welcome, #{current_user.first_name} #{current_user.last_name}!
-    div(class="#{current_user.is_admin ? 'admin-welcome' : 'user-welcome'}")
-      = current_user.is_admin ? "ADMIN" : "USER"
-    p #{current_user.email}
-    = link_to 'Edit Profile', edit_user_registration_path, class: 'styled-link'
-    br
     - if user_signed_in?
-      = link_to 'View Quiz Statistics', quiz_statistics_path, class: 'styled-link'
-      br
-      = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'styled-link'
-      br
-      = link_to 'Back to Index', quizzes_path, class: 'styled-link'
-  - else
-    p Please log in to become Admin or Guest.
-    = link_to 'Log in', new_user_session_path, class: 'styled-link'
-    br
-    = link_to 'Back to Index', quizzes_path, class: 'styled-link'
+        h3 Welcome, #{current_user.first_name} #{current_user.last_name}!
+        div style="background-color: #{current_user.is_admin ? 'rgba(0, 204, 255);' : 'rgb(255, 0, 170, 0.918)'}; color: #f1f1f1; font-size: 0.9rem"
+          = current_user.is_admin ? "IS ADMIN" : "user"
+        p #{current_user.email}
+        = link_to "Edit Profile", edit_user_registration_path, class: 'styled-link'
+        br
+        br
+        = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'styled-link'
+        br
+        - if user_signed_in?
+          = link_to 'View Quiz Statistics', quiz_statistics_path, class: 'styled-link'
+    - else
+        p Please log in to become Admin or Guest.
+        = link_to 'Log in', new_user_session_path, class: 'styled-link'
