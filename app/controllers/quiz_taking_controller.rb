@@ -1,3 +1,4 @@
+User
 class QuizTakingController < ApplicationController
   before_action :load_quiz_and_questions, only: %i[take submit]
 
@@ -17,12 +18,16 @@ class QuizTakingController < ApplicationController
 
       if selected_answers.empty?
         flash[:alert] = 'Please choose at least one answer before submitting.'
+        redirect_to take_quiz_path(@quiz, current_question_index: @current_question_index)
+        return
       else
         correct_answers = @current_question.answers.select(&:correct?).pluck
       end
     elsif @current_question.question_type == 'Single Answer'
       if user_answer.blank?
         flash[:alert] = 'Please enter an answer before submitting.'
+        redirect_to take_quiz_path(@quiz, current_question_index: @current_question_index)
+        return
       else
         correct_answer = @current_question.answers.find_by(correct: true)&.choice
       end
@@ -88,8 +93,8 @@ class QuizTakingController < ApplicationController
     if @current_question_index == @questions.length - 1
       session[:quiz_score] = calculate_score
       redirect_to quiz_results_path(@quiz)
-      if user_signed_in? # Check if the user is logged in
-        save_quiz_statistic # Call the method to save the quiz statistic
+      if user_signed_in?
+        save_quiz_statistic
       end
     else
       redirect_to take_quiz_path(@quiz, current_question_index: @current_question_index + 1)
@@ -97,18 +102,16 @@ class QuizTakingController < ApplicationController
   end
 
   def save_quiz_statistic
-    # Logic to save quiz statistics to the database
     quiz_statistic = QuizStatistic.new(
       test_id: @quiz.id,
       creator_id: @quiz.creator.id,
-      correct_answers: results.count { |result| result[:correct] == true }, # score <-- neder
+      correct_answers: results.count { |result| result[:correct] == true },
       total_questions: @questions.length,
       quiz_finisher_id: current_user.id,
       user_id: current_user.id
     )
   
     if quiz_statistic.save
-      # Optionally, you can add a flash message here
       flash[:alert] = 'Quiz statistic saved successfully!'
     else
       flash[:alert] = "Failed to save quiz statistic"
