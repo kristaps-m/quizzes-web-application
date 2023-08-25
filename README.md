@@ -1,16 +1,62 @@
-# grupa-4
+# Grupa 4
 
-# User Authentication (Devise):
-gem 'devise'
+# Quiz Management Web Application
 
-User:
-  first_name :string
-  last_name  :string
-  email      :string 
-  is_admin   :boolean
+Welcome to the Quiz Management Web Application! This Ruby on Rails-based application allows users to create, take, and manage quizzes. Whether you're a quiz enthusiast or an educator looking for an interactive platform, this application has you covered.
 
-  Ability to register as new User with name, lastname, email and password.
-  Ability to edit profile name, lastname, email, password and delete profile.
-  Users can create quizzes.
-  Users can see CRUD buttons for only those quizzes which they have created.
-  If user has admin profile (user.is_admin = true) he can CRUD all quizzes.
+## Features
+
+### 1. User Authentication
+
+- Users can sign up for an account or log in with their existing credentials.
+- User profiles are securely managed with Devise for authentication.
+
+### 2. Quiz Creation and Management
+
+- Users can create quizzes with titles and descriptions.
+- Quizzes can include images to make them visually appealing.
+- Questions can be added to quizzes with content and answer options.
+- Questions can have multiple-choice or single-answer formats.
+
+### 3. Quiz Taking
+
+- Users can take quizzes in an interactive manner.
+- For multiple-choice questions, users can choose their answers.
+- For single-answer questions, users can provide their responses.
+
+### 4. Quiz Statistics
+
+- Users can view detailed statistics for each quiz they take.
+- Statistics include scores, correctness, and individual question performance.
+
+### 5. Admin Panel
+
+- Admin users have special privileges to manage all quizzes and questions.
+- This includes editing, deleting, or creating new quizzes and questions.
+
+## Key Components
+
+### Controllers
+
+- `QuestionsController`: Manages questions associated with quizzes.
+- `QuizStatisticsController`: Handles quiz statistics, including scores and results.
+- `QuizTakingController`: Controls the quiz-taking process and results display.
+- `QuizzesController`: Manages quizzes and their associated questions.
+
+### Models
+
+- `Ability`: Defines user permissions and abilities using CanCanCan.
+- `Answer`: Represents answer choices for multiple-choice questions.
+- `Question`: Represents quiz questions and their answers.
+- `QuizStatistic`: Stores statistics related to quiz performance.
+- `Quiz`: Represents quizzes, which consist of questions.
+- `User`: Represents user accounts.
+
+### Views
+
+- Views correspond to various actions in the controllers and render the user interface for interaction.
+
+### Authentication and Authorization
+
+- User authentication is handled by Devise, allowing users to securely register and log in.
+- Authorization is implemented using CanCanCan, allowing or denying access to actions based on user roles and permissions.
