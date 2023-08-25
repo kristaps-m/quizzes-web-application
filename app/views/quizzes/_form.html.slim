@@ -10,7 +10,8 @@
   = form.text_area :description, class: 'form-style'
 
   = form.label :image, 'Image', class: 'form-label'
-  = form.file_field :image
+  br
+  = form.file_field :image, class: 'custom-file-input'
   - if quiz.image.attached?
     .d-flex.align-items-center
       = form.check_box :remove_image, value: '1', class: 'custom-checkbox'
