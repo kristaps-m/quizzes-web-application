@@ -1,16 +1,15 @@
 - quiz.errors.full_messages.each do |error|
   p style="color: rgba(0, 204, 255)"
     = error
-
 = form_with(model: quiz) do |form|
   = form.label :title, 'Title', class: 'form-label'
   = form.text_field :title, class: 'form-style'
-
   = form.label :description, 'Description', class: 'form-label'
   = form.text_area :description, class: 'form-style'
 
   = form.label :image, 'Image', class: 'form-label'
-  = form.file_field :image
+  br
+  = form.file_field :image, class: 'custom-file-input'
   - if quiz.image.attached?
     .d-flex.align-items-center
       = form.check_box :remove_image, value: '1', class: 'custom-checkbox'
@@ -21,7 +20,6 @@
     fieldset
       = q_form.label :content, 'Content', class: 'form-label'
       = q_form.text_field :content, class: 'form-style'
-
       - if q_form.object.question_type == 'Single Answer'
         = q_form.label :answer, 'Answer', class: 'form-label'
         = q_form.text_field :answer, class: 'form-style'
