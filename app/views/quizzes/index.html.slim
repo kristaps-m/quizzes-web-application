@@ -18,7 +18,10 @@ table.styled-table
         td = date_in_words(quiz.created_at)
         td = quiz.question_count
         td = quiz.description
-        td = button_to "Take Quiz", take_quiz_path(quiz), method: :get, class: 'custom-button-table'
+        - if quiz.question_count > 0
+          td = button_to "Take Quiz", take_quiz_path(quiz), method: :get, class: 'custom-button-table'
+        - else
+          td = "Take Quiz"
         td
           - if quiz.user_id.present?
             = "#{quiz.creator.first_name}, #{quiz.creator.last_name}"
