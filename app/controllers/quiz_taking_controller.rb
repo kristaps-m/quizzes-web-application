@@ -20,7 +20,6 @@ class QuizTakingController < ApplicationController
       redirect_to @quiz_progression_handler.next_question_path
     end
   end
-[10:23 AM]
 def results
     @quiz = Quiz.find(params[:id])
     @score, @results = @quiz_progression_handler.calculate_score_and_results
@@ -33,9 +32,9 @@ def results
     @quiz = Quiz.find(params[:id])
     @questions = @quiz.questions
     @current_question_index = params[:current_question_index].to_i
-    @current_question = @questions[@current_questionindex]
+    @current_question = @questions[@current_question_index]
     session["quiz#{params[:id]}_user_answers"] ||= {}
-    @quiz_progression_handler = QuizProgressionHandler.new(params[:id], @current_questionindex,
+    @quiz_progression_handler = QuizProgressionHandler.new(params[:id], @current_question_index,
                                                            session["quiz#{params[:id]}_user_answers"], self)
   end
 
