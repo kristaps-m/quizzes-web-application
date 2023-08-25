@@ -1,6 +1,5 @@
 div.content-container
   h1 = @question.quiz.title
-  // only admin and user that created quiz can see answer
   h2 = @question.content
   - if current_user && (current_user.id == @quiz.user_id || current_user.is_admin)
     h2 = @question.answer

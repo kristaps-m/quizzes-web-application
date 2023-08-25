@@ -1,25 +1,31 @@
 div.content-container
   h1 = @quiz.title
-  div
-    span(style="font-size: 16px;") Quiz created at: 
-    span(style="font-size: 16px;") = @quiz.created_at.strftime('%Y/%m/%d')
+  div.created
+    span Quiz created at: 
+    span = @quiz.created_at.strftime('%Y/%m/%d')
 
+    - if @quiz.creator.present?
+      p
+        | Quiz created by: 
+        = @quiz.creator.first_name
+        = ' '
+        = @quiz.creator.last_name
+
+  div
     p = @quiz.description
     - if @quiz.image.attached?
-        = image_tag @quiz.image, style: 'border: 2px solid #FF00AA;'
+      = image_tag @quiz.image, style: 'border: 2px solid #FF00AA;'
 
-    h3 Questions
-    ul
-      - @quiz.questions.each do |q|
-        li = link_to q.content, quiz_question_path(@quiz, q), class: 'styled-link'
+  h3 Questions
+  ul
+    - @quiz.questions.each do |q|
+      li = link_to q.content, quiz_question_path(@quiz, q), class: 'styled-link'
 
-    .button-container
-      // if site visitor is loged in and he is admin. He can see 3 buttons below
-      // if only user who created quiz can see 3 buttons below
-      - if current_user && (current_user.id == @quiz.user_id || current_user.is_admin)
-        = button_to 'Add Question', new_quiz_question_path(@quiz), method: :get, class: 'custom-button'
-        = button_to 'Edit Quiz', edit_quiz_path(@quiz), method: :get, class: 'custom-button'
-        = button_to "Destroy Quiz", @quiz, method: :delete, class: 'custom-button'
-        = button_to 'Back Quizzes', quizzes_path, method: :get, class: 'custom-button'
-      - else
-        = button_to 'Back Quizzes', quizzes_path, method: :get, class: 'custom-button'
+  .button-container
+    - if current_user && (current_user.id == @quiz.user_id || current_user.is_admin)
+      = button_to 'Add Question', new_quiz_question_path(@quiz), method: :get, class: 'custom-button'
+      = button_to 'Edit Quiz', edit_quiz_path(@quiz), method: :get, class: 'custom-button'
+      = button_to "Destroy Quiz", @quiz, method: :delete, class: 'custom-button'
+      = button_to 'Back Quizzes', quizzes_path, method: :get, class: 'custom-button'
+    - else
+      = button_to 'Back Quizzes', quizzes_path, method: :get, class: 'custom-button'

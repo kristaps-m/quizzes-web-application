@@ -1,22 +1,16 @@
-# frozen_string_literal: true
-
 class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # guest user (not logged in)
+    user ||= User.new
     if user.is_admin?
       can :manage, :all
-    elsif user.persisted? # Check if user is registered and not a guest
+    elsif user.persisted?
       can :manage, :all
-      # Allow managing quizzes and questions owned by the user
-      #can :manage, Quiz, user_id: user.id
-      #can :manage, Question, quiz: { user_id: user.id }
     else
       can :read, Quiz
       can :read, Question
-      cannot :read, Question, correct_answer: nil # Allow reading questions with correct answers
-      # Add more permissions for non-admin users as needed
+      cannot :read, Question, correct_answer: nil
     end
     # Define abilities for the user here. For example:
     #

@@ -1,3 +1,4 @@
-- if flash.any?
-- flash.each do |type, msg|
-    p.notice(class=type) = msg
+ - if flash.any?
+   - flash.each do |type, msg|
+     div.alert(class=type)
+       p = msg

@@ -1,18 +1,15 @@
 h1.index-title Group4 Quizzes
-
 h2.index-description Welcome to Group4 Quizzes, your one-stop destination for knowledge exploration. Immerse yourself in a world of interactive quizzes spanning an array of subjects. Challenge your intellect, learn something new, and have fun along the way! Feel free to pick and choose and quiz you want to play, or create one yourself!
 
 table.styled-table
   thead
     tr
-      //th Id
       th Title
       th Created At
       th Question Count
       th Description
       th Choose
       th Creator
-
   tbody
     - @quizzes.each do |quiz|
       tr
@@ -21,11 +18,13 @@ table.styled-table
         td = date_in_words(quiz.created_at)
         td = quiz.question_count
         td = quiz.description
-        td = button_to "Take Quiz", take_quiz_path(quiz), method: :get, class: 'custom-button-table'
+        - if quiz.question_count > 0
+          td = button_to "Take Quiz", take_quiz_path(quiz), method: :get, class: 'custom-button-table'
+        - else
+          td = "Take Quiz"
         td
           - if quiz.user_id.present?
             = "#{quiz.creator.first_name}, #{quiz.creator.last_name}"
 
-// if site visitor is loged. He can see Create Quiz button
 - if current_user
   = button_to 'Create Quiz', new_quiz_path, method: :get, class: 'custom-button'
