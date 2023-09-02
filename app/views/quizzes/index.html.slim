@@ -22,9 +22,10 @@ table.styled-table
           td = button_to "Take Quiz", take_quiz_path(quiz), method: :get, class: 'custom-button-table'
         - else
           td = "Take Quiz"
-        td
-          - if quiz.user_id.present?
-            = "#{quiz.creator.first_name}, #{quiz.creator.last_name}"
+        - if quiz.user_id.present?
+          td= "#{quiz.creator.first_name}, #{quiz.creator.last_name}"
+        - else
+          td= "DELETED USER"
 
 - if current_user
   = button_to 'Create Quiz', new_quiz_path, method: :get, class: 'custom-button'

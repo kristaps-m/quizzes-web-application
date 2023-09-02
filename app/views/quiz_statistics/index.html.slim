@@ -24,7 +24,10 @@ table.styled-table
     - @quiz_statistics.each do |quiz_statistic|
       tr
         td= quiz_statistic.quiz.title
-        td= "#{quiz_statistic.quiz.creator.first_name.first}., #{quiz_statistic.quiz.creator.last_name}"
+        - if quiz_statistic.quiz.creator.present?
+          td= "#{quiz_statistic.quiz.creator.first_name}, #{quiz_statistic.quiz.creator.last_name}"
+        - else
+          td= "DELETED USER"
         td= quiz_statistic.correct_answers.nil? ? 0 : quiz_statistic.correct_answers
         td= quiz_statistic.total_questions
         td= (quiz_statistic.correct_answers.nil? ? 0 : quiz_statistic.correct_answers / quiz_statistic.total_questions.to_f * 100).round(2)

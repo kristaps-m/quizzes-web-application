@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # devise_for :users # this was before modification about quizzes stay after user deleted
+  devise_for :users, controllers: { # user now can be deleted quizzes stays?
+    registrations: 'users/registrations'
+  }
+
   devise_scope :user do  
     get '/users/sign_out' => 'devise/sessions#destroy'     
   end

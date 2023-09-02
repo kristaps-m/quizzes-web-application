@@ -64,3 +64,7 @@ gem 'devise'
 
 # Define and manage permissions for different user roles:
 gem 'cancancan'
+
+# rails generate devise:controllers users =>
+# Please add the following to your Gemfile to avoid polling for changes:
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?

@@ -102,9 +102,11 @@ class QuizTakingController < ApplicationController
   end
 
   def save_quiz_statistic
+    #creator_id = @quiz.creator.id if @quiz.creator.id.present?
+
     quiz_statistic = QuizStatistic.new(
       test_id: @quiz.id,
-      creator_id: @quiz.creator.id,
+      creator_id: @quiz.creator&.id,
       correct_answers: results.count { |result| result[:correct] == true },
       total_questions: @questions.length,
       quiz_finisher_id: current_user.id,

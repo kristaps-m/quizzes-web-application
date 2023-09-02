@@ -3,9 +3,12 @@
 
   - if @quiz.creator.present?
   p 
-      | Quiz created by: 
-      = @quiz.creator.first_name
-      = @quiz.creator.last_name
+    | Quiz created by: 
+    - if @quiz.creator.present?
+      = @quiz.creator&.first_name
+      = @quiz.creator&.last_name
+    - else
+      = "DELETED USER"
 
   - if @score.is_a?(Integer)
     h2 Your Score: #{@score}
