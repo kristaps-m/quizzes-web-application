@@ -4,6 +4,22 @@
 
 Welcome to the Quiz Management Web Application! This Ruby on Rails-based application allows users to create, take, and manage quizzes. Whether you're a quiz enthusiast or an educator looking for an interactive platform, this application has you covered.
 
+<table>
+  <tr>
+    <th>Table of Quizzes / Statistics</th>
+    <th>Single answer question / Multiple answer question</th>
+  </tr>
+  <tr>
+    <td><img src="_readme pictures/quizzes_index.png" width="400"></td>
+    <td><img src="_readme pictures/question.png" width="400"></td>
+  </tr>
+  <tr>
+    <td><img src="_readme pictures/stats_index.png" width="400"></td>
+    <td><img src="_readme pictures/question_m.png" width="400"></td>
+
+  </tr>
+</table>
+
 ## Features
 
 ### 1. User Authentication
