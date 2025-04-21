@@ -1,5 +1,9 @@
 # Grupa 4
 
+# To start project
+
+go to terminal in and type `rails s`
+
 # Quiz Management Web Application
 
 Welcome to the Quiz Management Web Application! This Ruby on Rails-based application allows users to create, take, and manage quizzes. Whether you're a quiz enthusiast or an educator looking for an interactive platform, this application has you covered.
