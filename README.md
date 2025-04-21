@@ -2,7 +2,36 @@
 
 # To start project
 
-go to terminal in and type `rails s`
+- CLONE it OR Download .Zip file
+- open terminal in main folder (quizzes-web-application)
+
+- 1. bundle install
+- 2. npm install
+- 3. rails db:create db:migrate db:seed
+- 4. rails s
+- 5. Visit the app: Open http://localhost:3000 in your browser.
+
+# Exmaples
+
+<img src="_readme pictures/bundle.png">
+
+`npm install`
+
+<img src="_readme pictures/create_db_and_migrate.png">
+
+<img src="_readme pictures/rails_s.png">
+
+<img src="_readme pictures/webpacker_error.png">
+
+For newer Node you might run into problems :(
+
+Running into a common issue with Webpacker + Node 17+ and newer (especially Node 18+ and 20+). The key line here is:
+
+Error: error:0308010C:digital envelope routines::unsupported
+
+This happens because Node.js 17 and above changed how OpenSSL works, and Webpack 4 (used by Webpacker 5 in Rails 6) doesn’t support those changes.
+
+<img src="_readme pictures/webpacker_error_fixer.png">
 
 # Quiz Management Web Application
 
